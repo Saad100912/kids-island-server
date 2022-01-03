@@ -36,13 +36,6 @@ async function run() {
             const products = await cursor.toArray();
             res.json(products);
         });
-        // Get all Orders
-
-        app.get("/orders", async (req, res) => {
-            const cursor = ordersCollection.find({});
-            const orders = await cursor.toArray();
-            res.send(orders);
-        });
 
         // Get limited products for home page
         app.get("/home/products", async (req, res) => {
@@ -57,13 +50,6 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const product = await productsCollection.findOne(query);
             res.json(product);
-        });
-        // Get order by id
-        app.get("/orders/:id", async (req, res) => {
-            const id = req.params.id;
-            const query = { _id: ObjectId(id) };
-            const result = await ordersCollection.findOne(query);
-            res.json(result);
         });
 
         // Check if the user is admin or not
@@ -84,6 +70,14 @@ async function run() {
             const query = { email: email };
             const orders = ordersCollection.find(query);
             const result = await orders.toArray();
+            res.json(result);
+        });
+
+        // Get order by id
+        app.get("/orders/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const result = await ordersCollection.findOne(query);
             res.json(result);
         });
 
