@@ -70,6 +70,13 @@ async function run() {
             res.json(result);
         });
 
+        // Get orders
+        app.get("/orders", async (req, res) => {
+            const cursor = ordersCollection.find({});
+            const order = await cursor.toArray();
+            res.send(order);
+        });
+
         // Get all reviews
         app.get("/reviews", async (req, res) => {
             const cursor = reviewCollection.find({});
