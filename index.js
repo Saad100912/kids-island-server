@@ -70,6 +70,14 @@ async function run() {
             res.json(result);
         });
 
+        // Get order by id
+        app.get("/orders/:id", async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const order = ordersCollection.find(query);
+            res.json(order);
+        });
+
         // Get orders
         app.get("/orders", async (req, res) => {
             const cursor = ordersCollection.find({});
