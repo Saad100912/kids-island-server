@@ -9,7 +9,11 @@ const fileUpload = require("express-fileupload");
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(
+    cors({
+        origin: "https://kids-island-100912.web.app",
+    })
+);
 app.use(express.json());
 app.use(fileUpload());
 
@@ -51,6 +55,7 @@ async function run() {
             const product = await productsCollection.findOne(query);
             res.json(product);
         });
+
         // // Get order by id
         // app.get("/orders/:id", async (req, res) => {
         //     const id = req.params.id;
